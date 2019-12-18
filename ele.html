@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no">
+  <title>饿了么每日红包</title>
+  <link rel="stylesheet" href="https://res.wx.qq.com/open/libs/weui/2.1.3/weui.min.css">
+  <script src="https://cdn.bootcss.com/zepto/1.2.0/zepto.min.js"></script>
+  <style>
+    body {
+      color: white;
+      max-width: 800px;
+      margin: 0 auto;
+      background: url(bg.jpg) no-repeat;
+      background-size: 100% auto;
+      padding-top: 25px;
+    }
+    .head{
+      text-align: center;
+      margin-bottom: 25px;
+    }
+    .weui-cells {
+      border-radius: 4px;
+    }
+
+    .header {
+      margin: 0 20px;
+      background:white;
+      border-radius: 4px;
+      padding: 25px 15px 15px;
+      color: black;
+    }
+    .weui-check__label {
+      background: #f1f1f1;
+    }
+    .weui-cells_radio .weui-check:checked+.weui-icon-checked {
+      color: #409EFF;
+    }
+    .section {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+    .section .logo {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+    }
+    .section .sel {
+      background: #409EFF;
+      color: white;
+      padding: 2px 4px;
+      font-size: 14px;
+      border-radius: 4px;
+      font-weight: bold;
+      margin-left: 40px;
+    }
+    .weui-btn {
+      margin: 15px 0;
+      background: #409EFF !important;
+      width: 100%
+    }
+    .footer {
+      margin: 20px;
+      border-radius: 5px;
+      padding: 20px;
+      background: rgba(255,255,255,0.2);
+    }
+    li {
+        list-style:none;
+      }
+  </style>
+</head>
+<body>
+  <h1 class="head">饿了么免费红包</h1>
+  <div class="header">
+    <div class="section">
+      <img class="logo" src="data:image/png;base64,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 NzowMNYZhj8AAAAASUVORK5CYII=" alt="">
+      <div class="weui-flex">
+          <div class="weui-flex__item"><a class="sel" href="https://h5.ele.me/profile/info/#/">切换账号</a></div>
+          <div class="weui-flex__item"><a class="sel" href="https://h5.ele.me">立即点餐</a></div>
+          <div class="weui-flex__item"><a class="sel" onclick="alert('点击右上角的菜单栏分享给朋友吧!');">分享朋友</a></div>
+      </div>
+    </div>
+    <div class="weui-cells__title">请选择要领取的红包</div>
+    <div class="weui-cells weui-cells_radio">
+      <label class="weui-cell weui-check__label">
+          <div class="weui-cell__bd">饿了么免费红包1</div>
+          <div class="weui-cell__ft">
+            <input type="radio" class="weui-check" name="radio" checked="checked">
+            <span class="weui-icon-checked"></span>
+          </div>
+        </label>
+        <label class="weui-cell weui-check__label">
+          <div class="weui-cell__bd">饿了么免费红包2 </div>
+          <div class="weui-cell__ft">
+            <input type="radio" class="weui-check" name="radio">
+            <span class="weui-icon-checked"></span>
+          </div>
+        </label>
+    
+        <label class="weui-cell weui-check__label">
+          <div class="weui-cell__bd">饿了么免费红包3</div>
+          <div class="weui-cell__ft">
+            <input type="radio" class="weui-check" name="radio">
+            <span class="weui-icon-checked"></span>
+          </div>
+        </label>
+    
+        <label class="weui-cell weui-check__label" >
+          <div class="weui-cell__bd">饿了么免费红包4</div>
+          <div class="weui-cell__ft">
+            <input type="radio" class="weui-check" name="radio">
+            <span class="weui-icon-checked"></span>
+          </div>
+        </label>
+    </div>
+    <div class="center">
+      <a class="weui-btn weui-btn_primary" id="go-btn">马上领取</a>
+    </div>
+  </div>
+  <div class="footer">
+    <h4>领取规则：</h4>
+    <ul>
+      <li>1.双12狂欢月,最高可领31元红包券！</li>
+      <li>2.每天一次,先领券后点餐！</li>
+    </ul>
+  </div>
+  <script>
+   $("#go-btn").on('click', function(){
+          location.href='https://tb.ele.me/wow/ele-ad/act/elmtkhd?wh_biz=tm&from=cps_tk&ali_trackid=2:mm_127375797_40930038_166232813:1576646039_225_244180644&e=-s021XBSGOkm8O9PRUqlFgdxFceeJJ2i9VIUkiMK4Gc3EHwKGC3AikTnokIdtBrDVYE9q8EFhtHU8DHEznUtURiUPNDZI7Jgy4Sdid1NTT1y684EgGdEK9irEMrUfkEbE7SpDirUPmDEFU2XxIFMynZfSI1xks6kJdnyi7NzgPtrQUzoz2EuNr0o9lBxGJTF1bLvqUZv6f0RjgmtPaDFOzk0yXRHeIJrVgcInUbN2FR6zhkRxwCBXT9we6IeZ55ulpBPZyHo1Ltaddyb5HtXtivAwoX';
+    });
+  </script>
+  </body>
+</html>
